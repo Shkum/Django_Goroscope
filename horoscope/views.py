@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 #
 # def leo(request):
@@ -40,5 +41,8 @@ def get_info_about_sign_zodiac_by_number(request, sign_zodiac: int):
     zodiacs = list(zodiac_dict)
     if sign_zodiac > len(zodiacs):
         return HttpResponseNotFound(f'Wrong zodiac sign number - {sign_zodiac}...')
-    name_zodiac = zodiacs[sign_zodiac-1]
-    return HttpResponseRedirect(f'/horoscope/{name_zodiac}')
+    name_zodiac = zodiacs[sign_zodiac - 1]
+    redirect_url = reverse('horoscope_name', args=[name_zodiac])  # create redirect path using path from urls.py (must be tuple)
+    # return HttpResponseRedirect(f'/horoscope/{name_zodiac}')
+    print('d')
+    return HttpResponseRedirect(redirect_url)
