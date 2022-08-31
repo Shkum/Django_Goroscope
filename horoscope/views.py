@@ -29,14 +29,33 @@ zodiac_dict = {
 }
 
 
+def index(request):
+    zodiacs = list(zodiac_dict)
+    li_element = ''
+    for sign in zodiacs:
+        redirect_path = reverse('horoscope_name', args=[sign])
+        li_element += f'<li><a href="{redirect_path}">{sign.title()}</a></li>'
+    response = f'''
+    <ul>
+    {li_element}
+    </ul>
+    '''
+    return HttpResponse(response)
+
+
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
     description = zodiac_dict.get(sign_zodiac, None)
     if description:
-        return HttpResponse(description)
+        return HttpResponse(f'<h2>{description}<h>')
     else:
         return HttpResponseNotFound(f'Wrong zodiac sign - {sign_zodiac}...')
 
 
+# reverse getting path from variable name from view
+# from news import views
+# path('archive/', views.archive, name='news-archive')
+# from django.urls import reverse
+# reverse('news-archive')
 def get_info_about_sign_zodiac_by_number(request, sign_zodiac: int):
     zodiacs = list(zodiac_dict)
     if sign_zodiac > len(zodiacs):
