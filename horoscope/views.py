@@ -28,6 +28,10 @@ zodiac_dict = {
     'pisces': 'Pisces - <br>Twelfth zodiac sign, planet Jupiter (20 February - 20 March).',
 }
 
+zodiac_elements = {"fire": ['aries', 'leo', 'sagittarius'],
+                   'earth': ['taurus', 'virgo', 'capricorn'],
+                   'air': ['gemini', 'libra', 'aquarius'],
+                   'water': ['cancer', 'scorpio', 'pisces']}
 
 def index(request):
     zodiacs = list(zodiac_dict)
@@ -46,7 +50,7 @@ def index(request):
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
     description = zodiac_dict.get(sign_zodiac, None)
     if description:
-        return HttpResponse(f'<h2>{description}<h>')
+        return HttpResponse(f'<h2>{description}</h2>')
     else:
         return HttpResponseNotFound(f'Wrong zodiac sign - {sign_zodiac}...')
 
@@ -61,7 +65,32 @@ def get_info_about_sign_zodiac_by_number(request, sign_zodiac: int):
     if sign_zodiac > len(zodiacs):
         return HttpResponseNotFound(f'Wrong zodiac sign number - {sign_zodiac}...')
     name_zodiac = zodiacs[sign_zodiac - 1]
-    redirect_url = reverse('horoscope_name', args=[name_zodiac])  # create redirect path using path from urls.py (must be tuple)
+    redirect_url = reverse('horoscope_name', args=[name_zodiac])  # create redirect path using path from urls.py
     # return HttpResponseRedirect(f'/horoscope/{name_zodiac}')
-    print('d')
     return HttpResponseRedirect(redirect_url)
+
+
+def get_info_about_sign_zodiac_elements(request):
+    li_element = ''
+    for sign in zodiac_elements:
+        redirect_path = reverse('element_name', args=[sign])
+        li_element += f'<li><a href="{redirect_path}">{sign.title()}</a></li>'
+    response = f'''
+    <ul>
+    {li_element}
+    </ul>
+    '''
+    return HttpResponse(response)
+
+
+def get_info_about_sign_zodiac_by_elements(request, sign_element: str):
+    li_element = ''
+    for sign in zodiac_elements[sign_element]:
+        redirect_path = reverse('horoscope_name', args=[sign])
+        li_element += f'<li><a href="{redirect_path}">{sign.title()}</a></li>'
+    response = f'''
+    <ul>
+    {li_element}
+    </ul>
+    '''
+    return HttpResponse(response)
