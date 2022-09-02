@@ -1,7 +1,5 @@
 # Create your views here.
 
-from django.shortcuts import render
-
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from django.template.loader import render_to_string
@@ -15,18 +13,18 @@ from django.template.loader import render_to_string
 #     return HttpResponse(' Zodiac sign - scorpio')
 
 zodiac_dict = {
-    'aries': 'Aries - <First zodiac sign, planet Mars (21 March - 20 April).',
-    'taurus': 'Taurus - Second zodiac sign, planet Venus (21 April - 21 May).',
-    'gemini': 'Gemini - Third zodiac sign, planet Mercury (2 2May - 21 June).',
-    'cancer': 'Cancer - Forth zodiac sign, Moon (22 June - 2 July).',
-    'leo': ' Leo - Fifth  zodiac sign, planet Sun (23 July - 21 August).',
-    'virgo': 'Virgo - Sixth zodiac sign, planet Mercury (22 August - 22 September).',
-    'libra': 'Libra - Seventh zodiac sign, planet Venus (24 September - 23 October).',
-    'scorpio': 'Scorpio - Eighth zodiac sign, planet Mars (24 October - 22 November).',
-    'sagittarius': 'Sagittarius - Ninth zodiac sign, planet Jupiter (23 November - 22 December).',
-    'capricorn': 'Capricorn - Tenth zodiac sign, planet Saturn (23 December - 20 January).',
-    'aquarius': 'Aquarius - Eleventh zodiac sign, planets Uran and Saturn (21 January - 19 February).',
-    'pisces': 'Pisces - Twelfth zodiac sign, planet Jupiter (20 February - 20 March).',
+    'aries': 'Aries - <br>First zodiac sign, planet Mars (21 March - 20 April).',
+    'taurus': 'Taurus - <br>Second zodiac sign, planet Venus (21 April - 21 May).',
+    'gemini': 'Gemini - <br>Third zodiac sign, planet Mercury (2 2May - 21 June).',
+    'cancer': 'Cancer - <br>Forth zodiac sign, Moon (22 June - 2 July).',
+    'leo': ' Leo - <br>Fifth  zodiac sign, planet Sun (23 July - 21 August).',
+    'virgo': 'Virgo - <br>Sixth zodiac sign, planet Mercury (22 August - 22 September).',
+    'libra': 'Libra - <br>Seventh zodiac sign, planet Venus (24 September - 23 October).',
+    'scorpio': 'Scorpio - <br>Eighth zodiac sign, planet Mars (24 October - 22 November).',
+    'sagittarius': 'Sagittarius - <br>Ninth zodiac sign, planet Jupiter (23 November - 22 December).',
+    'capricorn': 'Capricorn - <br>Tenth zodiac sign, planet Saturn (23 December - 20 January).',
+    'aquarius': 'Aquarius - <br>Eleventh zodiac sign, planets Uran and Saturn (21 January - 19 February).',
+    'pisces': 'Pisces - <br>Twelfth zodiac sign, planet Jupiter (20 February - 20 March).',
 }
 
 zodiac_elements = {"fire": ['aries', 'leo', 'sagittarius'],
@@ -67,14 +65,12 @@ def index(request):
 
 
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
-    # response = render_to_string('horoscope/info_zodiac.html')
-    # return HttpResponse(response)
-    description = zodiac_dict.get(sign_zodiac)
-    data = {
-        'description_zodiac': description,
-        'sign': sign_zodiac
-    }
-    return render(request, 'horoscope/info_zodiac.html', context=data)
+    description = zodiac_dict.get(sign_zodiac, None)
+    response = render_to_string('info_zodiac.html')
+    if description:
+        return HttpResponse(f'<h2>{description}</h2>')
+    else:
+        return HttpResponseNotFound(f'Wrong zodiac sign - {sign_zodiac}...')
 
 
 # reverse - getting path from variable name from view
@@ -136,10 +132,10 @@ def get_info_by_date(request, month, day):
 def get_four_digits(request, dddd):
     return HttpResponse(f'<h2>Entered four digit number: {dddd}</h2>')
 
-
 def get_float_number(request, v_float):
     return HttpResponse(f'<h2>You entered float number: {v_float}</h2>')
 
-
 def get_entered_data(request, v_date):
     return HttpResponse(f'<h2>You entered date: {v_date}</h2>')
+
+

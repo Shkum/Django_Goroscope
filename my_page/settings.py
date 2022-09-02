@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'horoscope',
 ]
 
 MIDDLEWARE = [
@@ -51,10 +52,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'my_page.urls'
 
+
+
+# add our working dirrectory to DIR[]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+                # BASE_DIR / 'horoscope' / 'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
