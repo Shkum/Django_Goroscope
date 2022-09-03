@@ -15,7 +15,7 @@ from django.template.loader import render_to_string
 #     return HttpResponse(' Zodiac sign - scorpio')
 
 zodiac_dict = {
-    'aries': 'Aries - <First zodiac sign, planet Mars (21 March - 20 April).',
+    'aries': 'Aries - First zodiac sign, planet Mars (21 March - 20 April).',
     'taurus': 'Taurus - Second zodiac sign, planet Venus (21 April - 21 May).',
     'gemini': 'Gemini - Third zodiac sign, planet Mercury (2 2May - 21 June).',
     'cancer': 'Cancer - Forth zodiac sign, Moon (22 June - 2 July).',
@@ -26,7 +26,7 @@ zodiac_dict = {
     'sagittarius': 'Sagittarius - Ninth zodiac sign, planet Jupiter (23 November - 22 December).',
     'capricorn': 'Capricorn - Tenth zodiac sign, planet Saturn (23 December - 20 January).',
     'aquarius': 'Aquarius - Eleventh zodiac sign, planets Uran and Saturn (21 January - 19 February).',
-    'pisces': 'Pisces - Twelfth zodiac sign, planet Jupiter (20 February - 20 March).',
+    'pisces': 'Pisces - Twelfth zodiac sign, planet Jupiter (20 February - 20 March).'
 }
 
 zodiac_elements = {"fire": ['aries', 'leo', 'sagittarius'],
@@ -58,7 +58,7 @@ def index(request):
     for sign in zodiacs:
         redirect_path = reverse('horoscope_name', args=[sign])
         li_element += f'<li><a href="{redirect_path}">{sign.title()}</a></li>'
-    response = f'''
+    response = f'''<title>SEX</title>
     <ul>
     {li_element}
     </ul>
@@ -72,7 +72,12 @@ def get_info_about_sign_zodiac(request, sign_zodiac: str):
     description = zodiac_dict.get(sign_zodiac)
     data = {
         'description_zodiac': description,
-        'sign': sign_zodiac
+        'my_int': 1111,
+        'my_float': 111.5,
+        'sign': sign_zodiac,
+        'my_list': [1, 2, 3],
+        'my_dict': {'name': 'Jack', 'age': 40}
+
     }
     return render(request, 'horoscope/info_zodiac.html', context=data)
 
