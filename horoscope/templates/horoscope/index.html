@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title%}
+    Sign menu page
+{% endblock %}
+
+{% block content%}
+    <ul>
+        {% for zodiac in zodiacs %}
+        <li>{{ forloop.counter }} <a href="{% url 'horoscope_name' zodiac %}">{{ zodiac|title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+
+
+
+{#{% for key, value in zodiac_dict.items reversed %}#}
+{#   <p>{{ key|title }}: {{ value }}</p>#}
+{#{% endfor %}#}
+

@@ -1,15 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ sign.title }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+
+{% block title%}
+    {{ sign.title }}
+{% endblock %}
+
+{% block content%}
     <h1> Horoscope </h1>
     <h2>{{ description_zodiac }}</h2>
-    <p>Number {{ my_int }}</p>
-    <p>Float {{ my_float }}</p>
-    <p>List {{ my_list }}</p>
-    <p>Dict {{ my_dict }}</p>
-</body>
-</html>
+
+{#    <h3>Sign: <i>{{ sign }}</i></h3>#}
+{#    <h3>Sign: {{ sign }}</h3>#}
+{#    <p>Number {{ my_int }}</p>#}
+{#    <p>Float {{ my_float }}</p>#}
+{#    <p>List {{ my_list }}</p>#}
+{#    <p>List length {{ my_list|length }}</p>#}
+{#    <p>List Join {{ my_list|join:' ! ' }}</p>#}
+{#    <p>List first item {{ my_list|first }}</p>#}
+{#    <p>Dict {{ my_dict }}</p>#}
+{#    <p>Dict {{ my_dict }}, Name Key - {{ my_dict.name }}</p>#}
+{#    <p>Class instance {{ my_class }}, he is  {{ my_class.age }}</p>#}
+{#    <p>Default: {{ value|default:'nothing' }}</p>#}
+{#    <p>Default: {{ value_1|default:'yahooooo' }}</p>#}
+{#    <p>Default: {{ value_2|default:'yahooooo' }}</p>#}
+{% endblock %}

@@ -1,4 +1,5 @@
 # Create your views here.
+from dataclasses import dataclass
 
 from django.shortcuts import render
 
@@ -54,16 +55,21 @@ months = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31,
 
 def index(request):
     zodiacs = list(zodiac_dict)
-    li_element = ''
-    for sign in zodiacs:
-        redirect_path = reverse('horoscope_name', args=[sign])
-        li_element += f'<li><a href="{redirect_path}">{sign.title()}</a></li>'
-    response = f'''<title>SEX</title>
-    <ul>
-    {li_element}
-    </ul>
-    '''
-    return HttpResponse(response)
+    # li_element += f'<li><a href="{redirect_path}">{sign.title()}</a></li>'
+    context = {
+        'zodiacs': zodiacs,
+        'zodiac_dict': zodiac_dict
+    }
+    return render(request, 'horoscope/index.html', context=context)
+
+
+@dataclass
+class Person:
+    name: str
+    age: int
+
+    def __str__(self):
+        return f'This is {self.name}'
 
 
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
@@ -76,8 +82,11 @@ def get_info_about_sign_zodiac(request, sign_zodiac: str):
         'my_float': 111.5,
         'sign': sign_zodiac,
         'my_list': [1, 2, 3],
-        'my_dict': {'name': 'Jack', 'age': 40}
-
+        'my_dict': {'name': 'Jack', 'age': 40},
+        'my_class': Person('Will', 55),
+        'value': [],
+        'value_1': [],
+        'value_2': [1, 2, 3]
     }
     return render(request, 'horoscope/info_zodiac.html', context=data)
 
@@ -101,7 +110,7 @@ def get_info_about_sign_zodiac_elements(request):
     li_element = ''
     for sign in zodiac_elements:
         redirect_path = reverse('element_name', args=[sign])
-        li_element += f'<li><a href="{redirect_path}">{sign.title()}</a></li>'
+        li_element += f'<li><a href="{redirect_path}">{sign}</a></li>'
     response = f'''
     <ul>
     {li_element}
@@ -114,7 +123,7 @@ def get_info_about_sign_zodiac_by_elements(request, sign_element: str):
     li_element = ''
     for sign in zodiac_elements[sign_element]:
         redirect_path = reverse('horoscope_name', args=[sign])
-        li_element += f'<li><a href="{redirect_path}">{sign.title()}</a></li>'
+        li_element += f'<li><a href="{redirect_path}">{sign}</a></li>'
     response = f'''
     <ul>
     {li_element}
