@@ -3,7 +3,8 @@
 {% load static %}
 
 {% block css_additional%}
-     <link rel="stylesheet" href="{% static 'horoscope/css/info.css' %}">
+    <link rel="stylesheet" href="{% static 'horoscope/css/info.css' %}">
+    <link rel="stylesheet" href="{% static 'horoscope/css/index.css' %}">
 {% endblock %}
 
 {% block title%}
@@ -12,9 +13,9 @@
 
 {% block content%}
 
-    {% include 'includes/navbar.html' with a=100 b=200%}
+    {% include 'includes/navbar.html' %}
 
-    <h1> Horoscope for:</h1>
+    <h1> Horoscope for: {{ sign|title }}</h1>
     <h2>{{ description_zodiac }}</h2>
 
 {% endblock %}

@@ -1,6 +1,14 @@
 <nav>
-    <a href="{% url 'horoscope_index' %}">Main page</a> |
+
+    <a href="{% url 'horoscope_index' %}">Main page</a>
     <a href="http://www.homeenglish.ru/OtherGoroscop.htm">Source info</a>
+
+    <br>
+    {% for zodiac in zodiacs %}
+         <a href="{% url 'horoscope_name' zodiac %}">{{ zodiac|title }}</a>
+    {% endfor %}
 </nav>
-<p>Variable sign - {{ sign }}</p>
-<p>Zodiacs = {{ zodiacs }}</p>
+<div>
+    <p>Zodiacs = {{ zodiacs }}</p>
+</div>
+

@@ -4,23 +4,43 @@
 
 {% block css_additional%}
     <link rel="stylesheet" href="{% static 'horoscope/css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'horoscope/css/info.css' %}">
+    <link rel="stylesheet" href="{% static 'horoscope/css/marquee.css' %}">
 {% endblock %}
 
 
 {% block title%}
-    Sign menu page
+    Menu of zodiac signs
 {% endblock %}
 
 {% block content%}
-<h2>Test for second css file - 'info.css'</h2>
+    <h1>Horoscope page</h1>
     {% include 'includes/navbar.html' only %}
 
     <ul>
         {% for zodiac in zodiacs %}
-        <li>{{ forloop.counter }} <a href="{% url 'horoscope_name' zodiac %}">{{ zodiac|title }}</a></li>
+            <li>{{ forloop.counter }} <a href="{% url 'horoscope_name' zodiac %}">{{ zodiac|title }}</a></li>
         {% endfor %}
     </ul>
     {% include 'includes/navbar.html' %}
-    Variable 'Zodiacs' still accessible because without only
+
+
+    <div class="wrapper">
+        <div class="typing-demo">
+            Variable 'Zodiacs' still accessible because without only
+        </div>
+    </div>
+
+
+
+
+    <div class="marquee">
+    <div class="marqueeone">
+        Variable 'Zodiacs' still accessible because without only &nbsp;&nbsp;&nbsp;
+    </div>
+    </div>
+
+
+
+
+
 {% endblock %}

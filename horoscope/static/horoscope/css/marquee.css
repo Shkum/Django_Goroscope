@@ -1,0 +1,65 @@
+
+.wrapper {
+
+  /*This part is important for centering*/
+  display: grid;
+  place-items: inherit;
+}
+
+.typing-demo {
+  width: 56ch;
+  animation: typing 2s steps(56), blink 1s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  margin-left: 250px;
+  font-family: monospace;
+  font-size: 2em;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
+}
+
+
+
+
+
+
+.marquee {
+  height: 15px;
+  width: 86%;
+  overflow: hidden;
+  position: relative;
+  background-color: darksalmon;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 8px 0 4px 0;
+}
+
+.marquee .marqueeone{
+  animation: marquee 10s alternate-reverse infinite;
+}
+
+.marquee div {
+  position: absolute;
+}
+
+.marquee:hover div {
+  animation-play-state: paused;
+}
+
+/* add delay at the end of animation so you dont start while another div is going */
+@keyframes marquee {
+  0% { left: 17% }
+  /*50% {left: 50%}*/
+  100% { left: 65% }
+}
